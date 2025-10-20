@@ -1,9 +1,23 @@
 @font-face {
-	font-family: 'Pretendard';
-	font-weight: 45 920;
-	font-style: normal;
-	font-display: swap;
-	src: url('../assets/fonts/PretendardVariable.woff2') format('woff2-variations');
+  font-family: 'Pretendard';
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2-variations');
+}
+
+/* 기본 light 테마 변수 */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --gray: #e5e5e5;
+}
+
+/* dark 테마를 class로 적용 */
+html.dark {
+  --white: #000000;
+  --black: #ffffff;
+  --gray: #383838;
 }
 
 html,
