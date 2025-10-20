@@ -61,9 +61,9 @@ export default function Footer({ name }: FooterProps) {
       <ProviderBox>
         <Provider href={"https://github.com/Leewonno"} target="_blank">
           {theme === 'dark' ?
-            <ProviderIcon alt="github" src={githubLight} width={25} height={25} />
+            <ProviderIcon alt="github" src={githubLight} width={22} height={22} />
             :
-            <ProviderIcon alt="github" src={github} width={25} height={25} />
+            <ProviderIcon alt="github" src={github} width={22} height={22} />
           }
           <ProviderText>Developer</ProviderText>
         </Provider>
