@@ -1,8 +1,11 @@
 'use client'
 
 import Icon from "@/shares/components/Icon"
+import { setTheme } from "@/shares/lib/redux/features/theme/themeSlice"
+import { AppDispatch, RootState } from "@/shares/lib/redux/store"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 
 const Widget = styled.header`
@@ -21,7 +24,7 @@ const LogoBox = styled.div`
 `
 
 const Logo = styled(Link)`
-  font-weight: 800;
+  font-weight: 700;
   font-size: 22px;
   color: var(--black);
 `
@@ -51,9 +54,9 @@ type HeaderProps = {
 }
 
 export default function Header({ name }: HeaderProps) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  const dispatch = useDispatch<AppDispatch>();
 
-  // theme 상태가 바뀌면 html class를 업데이트
   useEffect(() => {
     const html = document.documentElement;
     if (theme === 'dark') {
@@ -64,7 +67,7 @@ export default function Header({ name }: HeaderProps) {
   }, [theme]);
 
   const handleThemeChange = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
   }
 
   return (

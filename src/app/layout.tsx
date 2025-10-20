@@ -6,6 +6,7 @@ import Header from "@/widgets/nav/components/Header";
 import Footer from "@/widgets/nav/components/Footer";
 import fs from "fs";
 import path from "path";
+import StoreProvider from "./StoreProvider";
 
 // 파일 읽기
 const getBasicData = async () => {
@@ -37,11 +38,13 @@ export default async function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
       </head>
       <body>
-        <StyledComponentsRegistry>
-          <Header name={data.name} />
-          {children}
-          <Footer name={data.name} />
-        </StyledComponentsRegistry>
+        <StoreProvider>
+          <StyledComponentsRegistry>
+            <Header name={data.name} />
+            {children}
+            <Footer name={data.name} />
+          </StyledComponentsRegistry>
+        </StoreProvider>
       </body>
     </html>
   );
