@@ -14,8 +14,10 @@ const Widget = styled.footer`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 10px;
   height: 100px;
   background-color: var(--white);
+  border-top: 1px solid #e5e5e5;
 `
 
 const NameBox = styled.div`
@@ -37,6 +39,7 @@ const Provider = styled(Link)`
   text-decoration: underline;
   display: flex;
   align-items: center;
+  gap: 2px;
 `
 
 const ProviderIcon = styled(Image)`
@@ -56,7 +59,7 @@ export default function Footer({ name }: FooterProps) {
   return (
     <Widget>
       <NameBox>
-        <Name>MyLog · {name}</Name>
+        <Name>2025 · MyLog · {name}</Name>
       </NameBox>
       <ProviderBox>
         <Provider href={"https://github.com/Leewonno"} target="_blank">
