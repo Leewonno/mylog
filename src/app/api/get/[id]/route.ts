@@ -3,13 +3,14 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-// ⚙️ Next.js 15 빌드 호환 버전
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
+  const { id } = await context.params; // 👈 Promise로부터 구조분해
+
   try {
-    const filePath = path.join(process.cwd(), "posts", `${params.id}.md`);
+    const filePath = path.join(process.cwd(), "posts", `${id}.md`);
 
     if (!fs.existsSync(filePath)) {
       return NextResponse.json(
