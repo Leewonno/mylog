@@ -13,7 +13,7 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { data: meta, content } = matter(fileContent);
   return (
     <>
-      <h1>{meta.title} {meta.date}</h1>
+      {/* <h1>{meta.title} {meta.date}</h1> */}
       <MarkdownViewer content={content} />
     </>
 
