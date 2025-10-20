@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import MarkdownViewer from "@/widgets/write/components/MarkdownViewer";
+import BoardTitle from "@/features/board/components/BoardTitle";
 
 export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { id } = await props.params;
@@ -13,7 +14,7 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { data: meta, content } = matter(fileContent);
   return (
     <>
-      {/* <h1>{meta.title} {meta.date}</h1> */}
+      <BoardTitle title={meta.title} />
       <MarkdownViewer content={content} />
     </>
 
