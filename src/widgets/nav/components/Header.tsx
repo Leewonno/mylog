@@ -13,10 +13,11 @@ const Widget = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 60px;
   padding: 0 20px;
   border-bottom: 1px solid #e5e5e5;
   background-color: var(--white);
+  position: fixed;
 `
 
 const LogoBox = styled.div`
