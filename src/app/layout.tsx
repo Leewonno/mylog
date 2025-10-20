@@ -8,6 +8,7 @@ import fs from "fs";
 import path from "path";
 import StoreProvider from "./StoreProvider";
 import Layout from "@/shares/ui/Layout";
+import { cookies } from "next/headers";
 
 // 파일 읽기
 const getBasicData = async () => {
@@ -32,8 +33,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await getBasicData();
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme')?.value
+
   return (
-    <html lang="ko">
+    <html lang="ko" className={theme === "dark" ? "dark" : "light"}>
       <head>
         {/* 구글 아이콘 */}
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -41,7 +45,7 @@ export default async function RootLayout({
       <body>
         <StoreProvider>
           <StyledComponentsRegistry>
-            <Header name={data.name} />
+            <Header name={data.name} storedTheme={theme} />
             <Layout>
               {children}
             </Layout>

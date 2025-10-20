@@ -52,23 +52,35 @@ const ThemeIconBox = styled.label`
 
 type HeaderProps = {
   name: string;
+  storedTheme: string | undefined;
 }
 
-export default function Header({ name }: HeaderProps) {
+export default function Header({ name, storedTheme }: HeaderProps) {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    if (storedTheme) {
+      dispatch(setTheme(storedTheme));
+    } else {
+      dispatch(setTheme('light'));
+    }
+  }, []);
+
+  const handleThemeChange = () => {
+    // 변경될 테마
+    const changeTheme = theme === 'dark' ? 'light' : 'dark'
+    // 전역변수에 담기
+    dispatch(setTheme(changeTheme));
+    // 쿠키에 테마 저장 -> SSR에서 불러올 수 있도록
+    document.cookie = `theme=${changeTheme}; path=/; max-age=31536000`;
+    // CSS 속성에 추가 또는 제거
     const html = document.documentElement;
-    if (theme === 'dark') {
+    if (changeTheme === 'dark') {
       html.classList.add('dark');
     } else {
       html.classList.remove('dark');
     }
-  }, [theme]);
-
-  const handleThemeChange = () => {
-    dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
   }
 
   return (
