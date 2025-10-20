@@ -13,5 +13,5 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   if (!fs.existsSync(filePath)) {
     return <div>파일을 불러올 수 없습니다.</div>;
   }
-  return <h1>Blog post: {content}</h1>
+  return <h1>Blog post: {content} {meta.date}</h1>
 }
