@@ -18,6 +18,7 @@ const Widget = styled.header`
   border-bottom: 1px solid #e5e5e5;
   background-color: var(--white);
   position: fixed;
+  z-index: 9999;
 `
 
 const LogoBox = styled.div`
