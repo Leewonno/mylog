@@ -21,6 +21,10 @@ const Widget = styled.header`
   z-index: 9999;
 `
 
+const LeftBox = styled.div`
+  
+`
+
 const LogoBox = styled.div`
   
 `
@@ -29,6 +33,11 @@ const Logo = styled(Link)`
   font-weight: 700;
   font-size: 22px;
   color: var(--black);
+`
+
+const RightBox = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const ThemeBox = styled.div`
@@ -45,6 +54,20 @@ const ThemeIconBox = styled.label`
   border-radius: 5px;
   display: flex;
   user-select: none;
+
+  &:hover {
+    background-color: var(--gray);
+  }
+`
+
+const MyBox = styled.div`
+
+`
+
+const MyLink = styled(Link)`
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
 
   &:hover {
     background-color: var(--gray);
@@ -86,19 +109,33 @@ export default function Header({ name, storedTheme }: HeaderProps) {
 
   return (
     <Widget>
-      <LogoBox>
-        <Logo href={'/'}>{name}</Logo>
-      </LogoBox>
-      <ThemeBox>
-        <ThemeCheckBox onChange={() => handleThemeChange()} id="theme" type="checkbox" />
-        <ThemeIconBox htmlFor="theme">
-          {theme === 'dark' ?
-            <Icon name='Bedtime' size="20px" color="#ffffff" />
-            :
-            <Icon name='Sunny' size="20px" color="#000000" />
-          }
-        </ThemeIconBox>
-      </ThemeBox>
+      <LeftBox>
+        <LogoBox>
+          <Logo href={'/'}>{name}</Logo>
+        </LogoBox>
+      </LeftBox>
+      <RightBox>
+        <ThemeBox>
+          <ThemeCheckBox onChange={() => handleThemeChange()} id="theme" type="checkbox" />
+          <ThemeIconBox htmlFor="theme">
+            {theme === 'dark' ?
+              <Icon name='Bedtime' size="20px" color="#ffffff" />
+              :
+              <Icon name='Sunny' size="20px" color="#000000" />
+            }
+          </ThemeIconBox>
+        </ThemeBox>
+        <MyBox>
+          <MyLink href={'/my'}>
+            {theme === 'dark' ?
+              <Icon name='account_circle' size="20px" color="#ffffff" />
+              :
+              <Icon name='account_circle' size="20px" color="#000000" />
+            }
+          </MyLink>
+        </MyBox>
+      </RightBox>
+
     </Widget>
   )
 }
