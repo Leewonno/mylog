@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "제목과 내용을 입력해주세요." }, { status: 400 });
   }
 
-  const dir = path.join(process.cwd(), "posts");
+  const dir = path.join(process.cwd(), "tmp");
   await mkdir(dir, { recursive: true });
 
   // posts 폴더 안 파일 목록 확인

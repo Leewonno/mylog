@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 
 export async function GET() {
-  const postsDir = path.join(process.cwd(), "posts");
+  const postsDir = path.join(process.cwd(), "tmp");
   const files = fs.readdirSync(postsDir);
 
   const posts = files

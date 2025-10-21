@@ -10,7 +10,7 @@ export async function GET(
   const { id } = await context.params; // 👈 Promise로부터 구조분해
 
   try {
-    const filePath = path.join(process.cwd(), "posts", `${id}.md`);
+    const filePath = path.join(process.cwd(), "tmp", `${id}.md`);
 
     if (!fs.existsSync(filePath)) {
       return NextResponse.json(
