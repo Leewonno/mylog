@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import postData from "@/shares/lib/post"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 
 const Widget = styled.div`
@@ -9,47 +10,56 @@ const Widget = styled.div`
 
 const CategoryBox = styled.div`
   display: flex;
-  align-items: center;
-  height: 75px;
+  flex-direction: column;
+  margin-bottom: 15px;
 `
 
 const Category = styled.div`
-  width: 15%;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 24px;
   color: var(--black);
+  margin-bottom: 10px;
 `
 
 const CategoryManageBox = styled.div`
-  width: 85%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: 20px;
 `
 
-const Name = styled.div`
-  width: 90%;
-  font-size: 25px;
+const CategoryContent = styled.div`
+  width: 100%;
+  font-size: 22px;
   color: var(--black);
-`
-
-const Site = styled.div`
-  width: 90%;
-  font-size: 25px;
-  color: var(--black);
+  padding: 10px 0;
+  padding-top: 0;
+  border-bottom: 1px solid var(--gray);
 `
 
 const ChangeInput = styled.input`
-  width: 90%;
-  height: 40px;
-  padding: 0 10px;
-  font-size: 20px;
+  width: 100%;
+  font-size: 22px;
+  padding: 10px 0;
+  padding-top: 0;
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  outline: none;
+  transition: all 0.3s;
+  background-color: var(--white);
+  color: var(--black);
+  
+  &:focus {
+    border-bottom: 1px solid var(--black);
+  }
 `
 
 const ChangeButton = styled.button`
-  height: 25px;
-  width: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 15px;
+  white-space: nowrap;
   border-radius: 15px;
   border: 1px solid var(--gray);
   cursor: pointer;
@@ -66,40 +76,50 @@ type Props = {
 
 export default function MyProfile({ auth, site }: Props) {
 
+  const nameRef = useRef<HTMLInputElement>(null);
+  const siteRef = useRef<HTMLInputElement>(null);
+
   const [name, setName] = useState<string>(auth.id);
   const [siteName, setSiteName] = useState<string>(site.name);
 
   const [isNameChange, setIsNameChange] = useState<boolean>(false);
   const [isSiteNameChange, setIsSiteNameChange] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const res = await fetch(`/api/get/auth`, {
-  //       cache: "no-store", // SSR 매 요청마다 갱신
-  //     });
-  //     const data = await res.json();
-  //     console.log(data)
-  //     if (data) {
-  //       const { id } = data.content
-  //       setName(id)
-  //     } else {
-  //       return (
-  //         <>오류가 발생했습니다.</>
-  //       )
-  //     }
-  //   }
-
-  //   getData();
-  // }, [])
-
-  const handleNameUpdate = () => {
-    
+  const handleNameUpdate = async () => {
+    try {
+      const data = { id: name }
+      const result = await postData('/api/post/auth/id', data);
+      const { message } = result;
+      alert(message);
+      setIsNameChange(false);
+    } catch (error) {
+      alert("오류가 발생했습니다.");
+    }
   }
 
-  const handleSiteNameUpdate = () => {
-
+  const handleSiteNameUpdate = async () => {
+    try {
+      const data = { name: siteName }
+      const result = await postData('/api/post/blog/name', data);
+      const { message } = result;
+      alert(message);
+      setIsSiteNameChange(false);
+    } catch (error) {
+      alert("오류가 발생했습니다.");
+    }
   }
 
+  useEffect(()=>{
+    if (isNameChange) {
+      nameRef.current?.focus();
+    }
+  }, [isNameChange])
+
+  useEffect(()=>{
+    if (isSiteNameChange) {
+      siteRef.current?.focus();
+    }
+  }, [isSiteNameChange])
 
   return (
     <Widget>
@@ -109,13 +129,13 @@ export default function MyProfile({ auth, site }: Props) {
         <CategoryManageBox>
           {isNameChange
             ?
-            <ChangeInput type="text" onChange={(e) => setName(e.target.value)} value={name} />
+            <ChangeInput ref={nameRef} type="text" onChange={(e) => setName(e.target.value)} value={name} />
             :
-            <Name onClick={() => setIsNameChange(true)}>{name}</Name>
+            <CategoryContent onClick={() => setIsNameChange(true)}>{name}</CategoryContent>
           }
           {isNameChange
             ?
-            <ChangeButton onClick={handleNameUpdate}>저장</ChangeButton>
+            <ChangeButton style={{backgroundColor:'#007bff', color:'#ffffff'}} onClick={handleNameUpdate}>저장</ChangeButton>
             :
             <ChangeButton onClick={() => setIsNameChange(true)}>수정</ChangeButton>
           }
@@ -127,13 +147,13 @@ export default function MyProfile({ auth, site }: Props) {
         <CategoryManageBox>
           {isSiteNameChange
             ?
-            <ChangeInput type="text" onChange={(e) => setSiteName(e.target.value)} value={siteName} />
+            <ChangeInput ref={siteRef} type="text" onChange={(e) => setSiteName(e.target.value)} value={siteName} />
             :
-            <Site onClick={() => setIsSiteNameChange(true)}>{siteName}</Site>
+            <CategoryContent onClick={() => setIsSiteNameChange(true)}>{siteName}</CategoryContent>
           }
           {isSiteNameChange
             ?
-            <ChangeButton onClick={handleSiteNameUpdate}>저장</ChangeButton>
+            <ChangeButton style={{backgroundColor:'#007bff', color:'#ffffff'}} onClick={handleSiteNameUpdate}>저장</ChangeButton>
             :
             <ChangeButton onClick={() => setIsSiteNameChange(true)}>수정</ChangeButton>
           }
