@@ -121,7 +121,7 @@ export default function MyProfile({ auth, site }: Props) {
   const handleSiteNameUpdate = async () => {
     try {
       const data = { name: siteName }
-      const result = await postData<BlogRequest, BlogResponse>('/api/post/blog/name', data);
+      const result = await postData<BlogRequest, BlogResponse>('/api/post/my/name', data);
       const { message } = result;
       alert(message);
       setIsSiteNameChange(false);
