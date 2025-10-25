@@ -1,26 +1,38 @@
 'use client'
 
+import { timeAgo } from "@/shares/lib/date"
 import styled from "styled-components"
 
 const Component = styled.div`
   width: 100%;
   margin-bottom: 30px;
-  font-size: 35px;
-  font-weight: 600;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   color: var(--black);
   background-color: var(--white);
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--gray);
+`
+
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+`
+
+const Date = styled.div`
+  
 `
 
 type Props = {
-  title: string;
+  children: React.ReactNode;
+  date: string;
 }
 
-export default function BoardTitle({ title }: Props) {
+export default function BoardTitle({ children, date }: Props) {
   return (
     <Component>
-      {title}
+      <Title>{children}</Title>
+      <Date>{timeAgo(date)}</Date>
     </Component>
   )
 }

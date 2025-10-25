@@ -1,22 +1,12 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import MarkdownViewer from "@/widgets/write/components/MarkdownViewer";
-import BoardTitle from "@/features/board/components/BoardTitle";
+import BoardPostContent from "@/widgets/board/components/BoardPostContent";
 
 export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { id } = await props.params;
-  const filePath = path.join(process.cwd(), "post", `${id}.md`);
-  if (!fs.existsSync(filePath)) {
-    return <div>파일을 불러올 수 없습니다.</div>;
-  }
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { data: meta, content } = matter(fileContent);
-  return (
-    <>
-      <BoardTitle title={meta.title} />
-      <MarkdownViewer content={content} />
-    </>
 
-  )
+  // 테스트용 인위적 지연
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
+  return (
+    <BoardPostContent id={id} />
+  );
 }
