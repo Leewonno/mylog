@@ -54,6 +54,15 @@ export function MyProfile({ auth }: Props) {
   return (
     <Widget>
       {/* 유저 정보 설정 */}
+      {/* 사용자명 설정 */}
+      <BoardCategory
+        name="사용자명"
+        category={name}
+        isChange={isNameChange}
+        setCategory={(value) => dispatch(setName(value))}
+        setIsChange={(value) => dispatch(setIsNameChange(value))}
+        handleUpdate={handleNameUpdate} />
+
       <BoardCategory
         name="사용자명"
         category={name}

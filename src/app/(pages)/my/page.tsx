@@ -16,7 +16,6 @@ const getSiteData = async () => {
   return content
 }
 
-
 export default async function My() {
   const auth = await getAuthData();
   const site = await getSiteData();

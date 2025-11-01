@@ -30,14 +30,14 @@ const Content = styled.div`
   width: 100%;
   font-size: 22px;
   color: var(--black);
-  padding: 10px 10px;
+  padding: 10px 0;
   padding-top: 0;
 `
 
 const Input = styled.input`
   width: 100%;
   font-size: 22px;
-  padding: 10px 10px;
+  padding: 10px 0;
   padding-top: 0;
   border: none;
   border-bottom: 1px solid var(--gray);

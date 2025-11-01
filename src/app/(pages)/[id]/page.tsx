@@ -8,6 +8,6 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
-    <BoardPostContent id={id} />
+    <BoardPostContent id={Number(id)} />
   );
 }

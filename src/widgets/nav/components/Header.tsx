@@ -54,7 +54,8 @@ const ThemeIconBox = styled.label`
   border-radius: 5px;
   display: flex;
   user-select: none;
-
+  transition: background-color 0s;
+  
   &:hover {
     background-color: var(--gray);
   }
@@ -68,6 +69,7 @@ const MyLink = styled(Link)`
   padding: 10px;
   border-radius: 5px;
   display: flex;
+  transition: background-color 0s;
 
   &:hover {
     background-color: var(--gray);

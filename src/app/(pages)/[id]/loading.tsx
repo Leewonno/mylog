@@ -6,9 +6,9 @@ export default function Loading() {
 
       {/* 본문 로딩 */}
       <div style={styles.container}>
-        <div style={{ ...styles.line, width: "90%" }}></div>
-        <div style={{ ...styles.line, width: "90%" }}></div>
-        <div style={{ ...styles.line, width: "90%" }}></div>
+        <div style={{ ...styles.line, width: "100%" }}></div>
+        <div style={{ ...styles.line, width: "100%" }}></div>
+        <div style={{ ...styles.line, width: "100%" }}></div>
       </div>
     </>
   );

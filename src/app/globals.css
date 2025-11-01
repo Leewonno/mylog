@@ -11,6 +11,8 @@
   --white: #ffffff;
   --black: #000000;
   --gray: #f2f2f2;
+  --white-gray: #7d7d7d;
+  --white-lightgray: #d2d2d2;
 }
 
 /* dark 테마를 class로 적용 */
@@ -18,6 +20,8 @@ html.dark {
   --white: #000000;
   --black: #ffffff;
   --gray: #383838;
+  --white-gray: #ffffff;
+  --white-lightgray: #ffffff;
 }
 
 html,
@@ -37,6 +41,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  transition: background-color 1.5s;
 }
 
 a {

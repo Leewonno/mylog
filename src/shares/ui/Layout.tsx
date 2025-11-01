@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 
 const Box = styled.div`
   width: 1000px;
+  padding-top: 100px;
 `
 
 type Props = {

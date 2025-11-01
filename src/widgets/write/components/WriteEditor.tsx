@@ -23,7 +23,6 @@ const TitleInput = styled.input`
   background-color: var(--white);
   padding-bottom: 5px;
   border-bottom: 1px solid var(--gray);
-  transition: border 0.3s;
 
   &:focus {
     border-bottom: 1px solid var(--black);

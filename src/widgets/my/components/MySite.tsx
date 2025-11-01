@@ -35,7 +35,7 @@ export function MySite({ site }: Props) {
   const isSiteNameChange = useSelector((state: RootState) => state.site.isSiteNameChange);
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(setSiteName(site.name));
   }, [])
 

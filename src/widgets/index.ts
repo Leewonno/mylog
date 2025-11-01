@@ -14,3 +14,6 @@ export { MyProfile } from './my'
 export { MySite } from './my'
 
 // home
+export { HomePreviewList } from './home'
+export { HomeUserInformation } from './home'
+export { HomePostNotFound } from './home'
