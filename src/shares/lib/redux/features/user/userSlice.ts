@@ -1,12 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface UserState {
-  userid: string | null;
+  name: string;
+  isNameChange: boolean;
+  email: string;
   isLogin: boolean;
 }
 
 const initialState: UserState = {
-  userid: null,
+  name: "",
+  isNameChange: false,
+  email: "",
   isLogin: false,
 };
 
@@ -14,8 +18,14 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.userid = action.payload;
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
+    setIsNameChange: (state, action) => {
+      state.isNameChange = action.payload;
+    },
+    setEmail: (state, action) => {
+      state.email = action.payload;
     },
     setIsLogin: (state, action) => {
       state.isLogin = action.payload;
@@ -23,5 +33,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setIsLogin } = userSlice.actions;
+export const { setName, setIsNameChange, setEmail, setIsLogin } = userSlice.actions;
 export default userSlice.reducer;

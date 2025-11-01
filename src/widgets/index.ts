@@ -11,5 +11,6 @@ export { WriteEditor } from './write'
 
 // my
 export { MyProfile } from './my'
+export { MySite } from './my'
 
 // home

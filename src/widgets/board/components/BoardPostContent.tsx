@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
-import BoardTitle from "@/features/board/components/BoardTitle";
 import { BoardNotFound } from "./BoardNotFound";
 import { MarkdownViewer } from "@/shares";
+import { BoardTitle } from "@/features";
 
-export async function BoardPostContent({ id }: { id: string }) {
+export async function BoardPostContent({ id }: { id: number }) {
   const filePath = path.join(process.cwd(), "post", `${id}.json`);
 
   if (!fs.existsSync(filePath)) {

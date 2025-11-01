@@ -28,7 +28,7 @@ type Props = {
   date: string;
 }
 
-export default function BoardTitle({ children, date }: Props) {
+export function BoardTitle({ children, date }: Props) {
   return (
     <Component>
       <Title>{children}</Title>

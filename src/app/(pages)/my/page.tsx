@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { MyProfile } from "@/widgets";
+import { MyProfile, MySite } from "@/widgets";
 
 const getAuthData = async () => {
   const filePath = path.join(process.cwd(), "blog", "auth.json");
@@ -22,7 +22,9 @@ export default async function My() {
   const site = await getSiteData();
 
   return (
-    <MyProfile auth={auth} site={site} />
-    // <MyUpdate />
+    <>
+      <MyProfile auth={auth}  />
+      <MySite site={site}/>
+    </>
   )
 }
