@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { HomePreviewList, HomeUserInformation } from "@/widgets";
+import { HomePreviewList, HomeSearch, HomeUserInformation } from "@/widgets";
 
 
 const getAuthData = async () => {
@@ -28,7 +28,7 @@ const getBlogData = async () => {
       const id = Number(filename.replace(".json", ""));
       return { id, data } as BoardListType;
     }).sort((a, b) => b.id - a.id);
-  
+
   return posts
 }
 
@@ -43,6 +43,7 @@ export default async function Home() {
   return (
     <>
       <HomeUserInformation data={userData} />
+      <HomeSearch />
       <HomePreviewList data={blogData} />
     </>
   );

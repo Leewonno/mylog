@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import homeReducer from './features/home/homeSlice';
 import siteReducer from './features/site/siteSlice';
 import userReducer from './features/user/userSlice';
 import themeReducer from './features/theme/themeSlice';
@@ -6,6 +7,7 @@ import themeReducer from './features/theme/themeSlice';
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      home: homeReducer,
       site: siteReducer,
       user: userReducer,
       theme: themeReducer,

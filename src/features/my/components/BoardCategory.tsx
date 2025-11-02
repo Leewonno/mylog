@@ -1,8 +1,6 @@
 'use client'
 
-import { AppDispatch } from "@/shares/lib/redux/store";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Component = styled.div`
@@ -71,11 +69,7 @@ type Props = {
 }
 
 export function BoardCategory({ name, category, isChange, setIsChange, setCategory, handleUpdate }: Props) {
-
   const ref = useRef<HTMLInputElement>(null);
-  // const dispatch = useDispatch<AppDispatch>();
-  // const [category, setCategory] = useState<string>(content);
-  // const [isChange, setIsChange] = useState<boolean>(false);
 
   useEffect(() => {
     if (isChange) {
@@ -95,7 +89,7 @@ export function BoardCategory({ name, category, isChange, setIsChange, setCatego
         }
         {isChange
           ?
-          <Button style={{ backgroundColor: '#007bff', color: '#ffffff' }} onClick={handleUpdate}>저장</Button>
+          <Button style={{ backgroundColor: 'var(--blue)', color: '#ffffff' }} onClick={handleUpdate}>저장</Button>
           :
           <Button onClick={() => setIsChange(true)}>수정</Button>
         }

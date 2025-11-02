@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 const Widget = styled.div`
   display: flex;
+  margin-top: 1.5rem;
 `
 
 const NoticeText = styled.div`

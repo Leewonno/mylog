@@ -14,7 +14,11 @@ const nextConfig: NextConfig = {
     ],
   },
   compiler: {
-    styledComponents: true,
+    styledComponents: {
+      displayName: true,
+      ssr: true,
+      fileName: false,
+    },
   },
 };
 

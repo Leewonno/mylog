@@ -7,21 +7,29 @@ import Image from "next/image"
 import Link from "next/link"
 import styled from "styled-components"
 import { HomePostNotFound } from "./HomePostNotFound"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "@/shares/lib/redux/store"
+import { setBoardListData, setSearchListData } from "@/shares/lib/redux/features/home/homeSlice"
 
 const Widget = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
 
+  /* 맨 마지막 Item에 margin-bottom */
   &:nth-last-child(1) {
     margin-bottom: 2rem;
   }
 `
 
 const Item = styled.div`
-  border-bottom: 1px solid var(--gray);
-  /* margin-top: 1.5rem; */
   padding: 2.5rem 0;
+
+  /* 맨 마지막 Item을 제외하고 border-bottom 주기 */
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--gray);
+  }
 `
 
 const PostLink = styled(Link)`
@@ -30,9 +38,14 @@ const PostLink = styled(Link)`
   gap: 1.5rem;
 `
 
-const PostDefaultImage = styled(Image)`
-  object-fit: cover;
+const PostMainImageWrapper = styled.div`
+  position: relative;
   width: 100%;
+  height: 400px;
+`
+
+const PostMainImage = styled(Image)`
+  object-fit: cover;
   border-radius: 10px;
 `
 
@@ -68,34 +81,46 @@ type Props = {
 }
 
 export function HomePreviewList({ data }: Props) {
+
+  const searchListData = useSelector((state: RootState) => state.home.searchListData);
+  const boardListData = useSelector((state: RootState) => state.home.boardListData);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(()=>{
+    dispatch(setBoardListData(data));
+    dispatch(setSearchListData(data));
+  }, [])
+
   return (
     <Widget>
       {/* 게시물 */}
       {
-        data ?
-        data.map((v, i) => {
-          const content = replaceContent(v.data.content);
-          const firstImg: string | null = getDefaultImage(v.data.content);
-          return (
-            <Item key={`${i}`}>
-              <PostLink href={`/${v.id}`}>
-                {
-                  firstImg ?
-                    <PostDefaultImage src={firstImg} alt="default_img" width={1000} height={400} unoptimized />
-                    :
-                    <></>
-                }
-                <PostTitle>{v.data.title}</PostTitle>
-                <PostContent>{content.slice(0, 400)}{content.length > 400 ? '...' : ''}</PostContent>
-                <PostInforBox>
-                  <PostDate>{timeAgo(v.data.date)}</PostDate>
-                </PostInforBox>
-              </PostLink>
-            </Item>
-          )
-        })
-        :
-        <HomePostNotFound />
+        searchListData ?
+        searchListData.map((v, i) => {
+            const content = replaceContent(v.data.content);
+            const firstImg: string | null = getDefaultImage(v.data.content);
+            return (
+              <Item key={`${i}`}>
+                <PostLink href={`/${v.id}`} scroll={true}>
+                  {
+                    firstImg ?
+                      <PostMainImageWrapper>
+                        <PostMainImage src={firstImg} alt="main_img" fill unoptimized />
+                      </PostMainImageWrapper>
+                      :
+                      <></>
+                  }
+                  <PostTitle>{v.data.title}</PostTitle>
+                  <PostContent>{content.slice(0, 400)}{content.length > 400 ? '...' : ''}</PostContent>
+                  <PostInforBox>
+                    <PostDate>{timeAgo(v.data.date)}</PostDate>
+                  </PostInforBox>
+                </PostLink>
+              </Item>
+            )
+          })
+          :
+          <HomePostNotFound />
       }
     </Widget>
   )

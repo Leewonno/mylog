@@ -4,7 +4,7 @@ import React from "react"
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin-top: 60px;
+  padding-top: 60px;
   min-height: 100vh;
   display: flex;
   justify-content: center;

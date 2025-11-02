@@ -7,7 +7,7 @@ import path from "path";
 import StoreProvider from "./StoreProvider";
 import { cookies } from "next/headers";
 import { Footer, Header } from "@/widgets";
-import { Layout } from "@/shares";
+import { Layout, ScrollToTop } from "@/shares";
 
 // 파일 읽기
 const getBasicData = async () => {
@@ -49,6 +49,7 @@ export default async function RootLayout({
         <StoreProvider>
           {/* Styled Components */}
           <StyledComponentsRegistry>
+            <ScrollToTop />
             <Header name={data.name} storedTheme={theme} />
             <Layout>
               {children}

@@ -19,6 +19,10 @@ const Widget = styled.header`
   background-color: var(--white);
   position: fixed;
   z-index: 9999;
+  /* 글래스모피즘 */
+  /* background: rgba( 255, 255, 255, 0.15 );
+  backdrop-filter: blur( 4.5px );
+  border: 1px solid rgba( 0, 255, 255, 0.18 ); */
 `
 
 const LeftBox = styled.div`
@@ -40,7 +44,7 @@ const RightBox = styled.div`
   align-items: center;
 `
 
-const ThemeBox = styled.div`
+const LinkBox = styled.div`
   
 `
 
@@ -61,11 +65,7 @@ const ThemeIconBox = styled.label`
   }
 `
 
-const MyBox = styled.div`
-
-`
-
-const MyLink = styled(Link)`
+const HeaderLink = styled(Link)`
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -117,7 +117,7 @@ export function Header({ name, storedTheme }: HeaderProps) {
         </LogoBox>
       </LeftBox>
       <RightBox>
-        <ThemeBox>
+        <LinkBox>
           <ThemeCheckBox onChange={() => handleThemeChange()} id="theme" type="checkbox" />
           <ThemeIconBox htmlFor="theme">
             {theme === 'dark' ?
@@ -126,18 +126,26 @@ export function Header({ name, storedTheme }: HeaderProps) {
               <Icon name='Sunny' size="20px" color="#000000" />
             }
           </ThemeIconBox>
-        </ThemeBox>
-        <MyBox>
-          <MyLink href={'/my'}>
+        </LinkBox>
+        <LinkBox>
+          <HeaderLink href={'/write'}>
+            {theme === 'dark' ?
+              <Icon name='edit' size="20px" color="#ffffff" />
+              :
+              <Icon name='edit' size="20px" color="#000000" />
+            }
+          </HeaderLink>
+        </LinkBox>
+        <LinkBox>
+          <HeaderLink href={'/my'}>
             {theme === 'dark' ?
               <Icon name='account_circle' size="20px" color="#ffffff" />
               :
               <Icon name='account_circle' size="20px" color="#000000" />
             }
-          </MyLink>
-        </MyBox>
+          </HeaderLink>
+        </LinkBox>
       </RightBox>
-
     </Widget>
   )
 }
