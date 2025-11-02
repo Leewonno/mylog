@@ -39,14 +39,11 @@ export async function generateMetadata(props: PageProps<'/[id]'>): Promise<Metad
 export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { id } = await props.params;
   const data = await getPostData(Number(id));
-
   if (!data) {
     return <BoardNotFound />;
   }
-
   // 테스트용 인위적 지연
   // await new Promise((resolve) => setTimeout(resolve, 500));
-
   return (
     <BoardPostContent date={data.date} title={data.title} content={data.content} />
   );
