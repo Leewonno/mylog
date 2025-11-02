@@ -26,11 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const data = await getBasicData();
   const cookieStore = await cookies();
   const theme = cookieStore.get('theme')?.value
@@ -49,8 +45,10 @@ export default async function RootLayout({
         <StoreProvider>
           {/* Styled Components */}
           <StyledComponentsRegistry>
+            {/* 스크롤 이동 */}
             <ScrollToTop />
             <Header name={data.name} storedTheme={theme} />
+            {/* 전체 페이지 관리 레이아웃 */}
             <Layout>
               {children}
             </Layout>

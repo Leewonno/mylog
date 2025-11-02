@@ -45,7 +45,7 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   }
 
   // 테스트용 인위적 지연
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  // await new Promise((resolve) => setTimeout(resolve, 500));
 
   return (
     <BoardPostContent date={data.date} title={data.title} content={data.content} />

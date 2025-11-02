@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-import { BoardNotFound } from "./BoardNotFound";
 import { MarkdownViewer } from "@/shares";
 import { BoardTitle } from "@/features";
 
