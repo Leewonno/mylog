@@ -4,7 +4,7 @@ import "@/shares/styles/mdeditor.css";
 import { StyledComponentsRegistry } from "@/shares/lib/registry";
 import fs from "fs";
 import path from "path";
-import StoreProvider from "./StoreProvider";
+import StoreProvider from "../StoreProvider";
 import { cookies } from "next/headers";
 import { Footer, Header } from "@/widgets";
 import { Layout, ScrollToTop } from "@/shares";

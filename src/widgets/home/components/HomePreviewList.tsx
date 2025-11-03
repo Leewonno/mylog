@@ -11,6 +11,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/shares/lib/redux/store"
 import { setBoardListData, setSearchListData } from "@/shares/lib/redux/features/home/homeSlice"
+import { media } from "@/shares/lib/media"
 
 const Widget = styled.div`
   width: 100%;
@@ -30,12 +31,20 @@ const Item = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid var(--gray);
   }
+
+  ${media.phone`
+    padding: 2rem 0;
+  `}
 `
 
 const PostLink = styled(Link)`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  ${media.phone`
+    gap: 1rem;
+  `}
 `
 
 const PostMainImageWrapper = styled.div`
@@ -57,6 +66,10 @@ const PostTitle = styled.div`
   &:hover {
     text-decoration: underline;
   }
+
+  ${media.phone`
+    font-size: 20px;
+  `}
 `
 
 const PostContent = styled.div`
@@ -64,7 +77,11 @@ const PostContent = styled.div`
 
   &:hover {
     text-decoration: underline;
-  }
+  };
+  
+  ${media.phone`
+    font-size: 15px;
+  `}
 `
 
 const PostInforBox = styled.div`
@@ -74,6 +91,10 @@ const PostInforBox = styled.div`
 
 const PostDate = styled.div`
   color: var(--white-lightgray-text);
+
+  ${media.phone`
+    font-size: 15px;
+  `}
 `
 
 type Props = {

@@ -1,6 +1,7 @@
 'use client'
 
 import Icon from "@/shares/components/Icon"
+import { media } from "@/shares/lib/media"
 import Link from "next/link"
 import styled from "styled-components"
 
@@ -13,16 +14,34 @@ const Widget = styled.div`
   align-items: center;
   gap: 10px;
   color: #000;
+
+  ${media.phone`
+    padding: 20px 10px;
+  `}
 `
 
 const LargeText = styled.div`
   font-size: 1.2rem;
+
+  ${media.phone`
+    font-size: 1rem;
+    text-align: center;
+  `}
+`
+
+const TextBox = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  ${media.phone`
+    flex-direction: column;
+  `}
 `
 
 const Text = styled.div`
   display: flex;
   gap: 5px;
-  align-items: center;
 `
 
 const Bold = styled.div`
@@ -41,6 +60,10 @@ const Button = styled(Link)`
   &:hover {
     background-color: #dfdfdf;
   }
+
+  ${media.phone`
+    font-size: 14px;
+  `}
 `
 
 type Props = {
@@ -52,15 +75,15 @@ export function BoardComment({ name, email }: Props) {
   return (
     <Widget>
       <LargeText>
-        이 포스트에 대해 이야기를 나누고 싶다면,
+        이 포스트에 대해 이야기를 나누고 싶다면
       </LargeText>
-      <Text>
-        <Bold>{name}</Bold>님에게
+      <TextBox>
+        <Text><Bold>{name}</Bold>님에게</Text>
         <Button href={`mailto:${email}`}>
           <Icon name={'email'} size={'18px'} color={'#000'}  />
           이메일 보내기
         </Button>
-      </Text>
+      </TextBox>
 
     </Widget>
   )

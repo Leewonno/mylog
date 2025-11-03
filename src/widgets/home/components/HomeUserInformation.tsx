@@ -8,12 +8,17 @@ import emailLight from "@/assets/icons/email-light.svg";
 import address from "@/assets/icons/address.svg";
 import addressLight from "@/assets/icons/address-light.svg";
 import { SvgIcon } from "@/shares"
+import { media } from "@/shares/lib/media";
 
 const Widget = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  ${media.phone`
+    gap: 1rem;
+  `}
 `
 
 const UserBox = styled.div`
@@ -23,6 +28,11 @@ const UserBox = styled.div`
   gap: 1rem;
   border-bottom: 1px solid var(--gray);
   padding-bottom: 1rem;
+
+  ${media.phone`
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+  `}
 `
 
 const UserName = styled.div`

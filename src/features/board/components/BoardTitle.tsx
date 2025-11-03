@@ -1,5 +1,6 @@
 'use client'
 
+import { media } from "@/shares/lib/media"
 import styled from "styled-components"
 
 const Component = styled.div`
@@ -11,6 +12,11 @@ const Component = styled.div`
 const Title = styled.div`
   font-size: 2rem;
   font-weight: 700;
+
+  ${media.phone`
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  `}
 `
 
 type Props = {

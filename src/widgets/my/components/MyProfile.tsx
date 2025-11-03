@@ -15,7 +15,6 @@ const Widget = styled.div`
   border-radius: 15px;
 `
 
-
 type Props = {
   auth: {
     id: string;

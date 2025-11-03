@@ -2,6 +2,7 @@
 
 import React from "react"
 import styled from "styled-components";
+import { media } from "../lib/media";
 
 const Wrapper = styled.div`
   padding-top: 60px;
@@ -10,11 +11,20 @@ const Wrapper = styled.div`
   justify-content: center;
   background-color: var(--white);
   padding: 20px;
+
+
+  ${media.phone`
+  `}
 `
 
 const Box = styled.div`
   width: 1000px;
   padding-top: 100px;
+
+  ${media.phone`
+    width: 100%;
+    padding-top: 60px;
+  `}
 `
 
 type Props = {

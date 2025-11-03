@@ -20,10 +20,6 @@
     background-color: var(--white) !important;
 }
 
-/* .w-md-editor-toolbar {
-    background-color: #f9f9f9 !important;
-} */
-
 .wmde-markdown-color p,
 .wmde-markdown-color li,
 .wmde-markdown-color h1,
@@ -38,4 +34,30 @@
 /* 편집 영역 텍스트 입력 창 */
 .w-md-editor-text {
     min-height: 100% !important;
+}
+
+@media (max-width: 800px) {
+    .wmde-markdown-color h1 {
+        font-size: 1.6rem !important;
+    }
+
+    .wmde-markdown-color h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .wmde-markdown-color h3 {
+        font-size: 1.3rem !important;
+    }
+
+    .wmde-markdown-color h4 {
+        font-size: 1.2rem !important;
+    }
+
+    .wmde-markdown-color h5 {
+        font-size: 1.1rem !important;
+    }
+
+    .wmde-markdown-color h6 {
+        font-size: 1rem !important;
+    }
 }

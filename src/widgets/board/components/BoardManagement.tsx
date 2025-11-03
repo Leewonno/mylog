@@ -2,6 +2,7 @@
 
 import { BoardDate, BoardName, BoardTitle } from "@/features";
 import { timeAgo } from "@/shares/lib/date";
+import { media } from "@/shares/lib/media";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -12,11 +13,18 @@ const Widget = styled.div`
   margin-bottom: 3rem;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--white-lightgray);
+
+  ${media.phone`
+    gap: 1rem;
+    margin-bottom: 2rem;
+  `}
 `
 
 const BoardInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
 `
 
 const BoardMetaBox = styled.div`
@@ -33,6 +41,7 @@ const BoardDot = styled.div`
 
 const BoardButtonBox = styled.div`
   display: flex;
+  justify-content: flex-end;
 `
 
 const BoardButton = styled(Link)`
