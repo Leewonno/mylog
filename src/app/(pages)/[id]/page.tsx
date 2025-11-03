@@ -21,8 +21,8 @@ async function getBoardData(id: number): Promise<BoardData | null> {
 }
 
 // 파일 읽기
-const getUserData = async () => {
-  const filePath = path.join(process.cwd(), "blog", "auth.json");
+const getBlogData = async () => {
+  const filePath = path.join(process.cwd(), "data.json");
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const content = JSON.parse(fileContent);
   return content
@@ -45,7 +45,7 @@ export async function generateMetadata(props: PageProps<'/[id]'>): Promise<Metad
 export default async function BlogPost(props: PageProps<'/[id]'>) {
   const { id } = await props.params;
   const boardData = await getBoardData(Number(id));
-  const userData = await getUserData();
+  const userData = await getBlogData();
 
   if (!boardData) {
     return <BoardNotFound />;

@@ -3,15 +3,8 @@ import fs from "fs";
 import { MyProfile, MySite } from "@/widgets";
 import { Unauthorized } from "@/shares";
 
-const getAuthData = async () => {
-  const filePath = path.join(process.cwd(), "blog", "auth.json");
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const content = JSON.parse(fileContent);
-  return content
-}
-
-const getSiteData = async () => {
-  const filePath = path.join(process.cwd(), "blog", "info.json");
+const getBlogData = async () => {
+  const filePath = path.join(process.cwd(), "data.json");
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const content = JSON.parse(fileContent);
   return content
@@ -25,12 +18,11 @@ export default async function My() {
     )
   }
   // 개인정보, 사이트정보 불러오기
-  const auth = await getAuthData();
-  const site = await getSiteData();
+  const data = await getBlogData();
   return (
     <>
-      <MyProfile auth={auth} />
-      <MySite site={site} />
+      <MyProfile auth={data} />
+      <MySite site={data} />
     </>
   )
 }
