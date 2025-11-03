@@ -11,7 +11,7 @@ const Component = styled.div`
 
 const CategoryName = styled.div`
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   color: var(--black);
   margin-bottom: 10px;
 `
@@ -20,43 +20,43 @@ const ManageBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 20px;
 `
 
 const Content = styled.div`
   width: 100%;
-  font-size: 22px;
+  font-size: 16px;
   color: var(--black);
-  padding: 10px 0;
+  padding: 10px;
   padding-top: 0;
 `
 
 const Input = styled.input`
   width: 100%;
-  font-size: 22px;
-  padding: 10px 0;
-  padding-top: 0;
+  font-size: 16px;
+  padding: 10px;
   border: none;
-  border-bottom: 1px solid var(--gray);
+  border: 1px solid var(--gray);
   outline: none;
   transition: all 0.3s;
   background-color: var(--white);
   color: var(--black);
   
   &:focus {
-    border-bottom: 1px solid var(--black);
+    border: 1px solid var(--black);
   }
 `
 
 const Button = styled.button`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   padding: 5px 15px;
   white-space: nowrap;
   border-radius: 15px;
   border: 1px solid var(--gray);
   cursor: pointer;
+  transition: background-color 0.3s;
 `
 
 type Props = {
@@ -81,12 +81,13 @@ export function BoardCategory({ name, category, isChange, setIsChange, setCatego
     <Component>
       <CategoryName>{name}</CategoryName>
       <ManageBox>
-        {isChange
+        <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} />
+        {/* {isChange
           ?
           <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} />
           :
           <Content onClick={() => setIsChange(true)}>{category}</Content>
-        }
+        } */}
         {isChange
           ?
           <Button style={{ backgroundColor: 'var(--blue)', color: '#ffffff' }} onClick={handleUpdate}>저장</Button>

@@ -1,6 +1,7 @@
 'use client'
 
 import { BoardCategory } from "@/features"
+import Icon from "@/shares/components/Icon"
 import postData from "@/shares/lib/post"
 import { setIsSiteNameChange, setSiteName } from "@/shares/lib/redux/features/site/siteSlice"
 import { AppDispatch, RootState } from "@/shares/lib/redux/store"
@@ -10,9 +11,19 @@ import styled from "styled-components"
 
 const Widget = styled.div`
   width: 100%;
-  padding: 20px;
-  border: 1px solid var(--gray);
-  border-radius: 15px;
+  margin-bottom: 3rem;
+`
+
+const WidgetTitle = styled.div`
+  color: var(--black);
+  font-size: 22px;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `
 
 type Props = {
@@ -53,6 +64,10 @@ export function MySite({ site }: Props) {
 
   return (
     <Widget>
+      <WidgetTitle>
+        <Icon name="web_asset" size="25px" color="var(--black)" />
+        사이트 설정
+      </WidgetTitle>
       {/* 사이트 설정 */}
       <BoardCategory
         name="사이트명"
