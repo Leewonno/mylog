@@ -45,6 +45,7 @@ const BoardButton = styled(Link)`
   transition: background-color 0.3s;
   background-color: #f3f3f3;
   font-size: 14px;
+  color: #000;
 
   &:hover {
     background-color: #dfdfdf;

@@ -12,6 +12,7 @@ const Widget = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  color: #000;
 `
 
 const LargeText = styled.div`

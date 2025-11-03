@@ -56,6 +56,15 @@ a {
   html {
     color-scheme: dark;
   }
+
+  /* * {
+    --white: #000000;
+    --black: #ffffff;
+    --gray: #383838;
+    --white-gray: #ffffff;
+    --white-lightgray: #ffffff;
+    --white-lightgray-text: #ffffff;
+  } */
 }
 
 @keyframes pulse {

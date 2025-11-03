@@ -82,6 +82,7 @@ type HeaderProps = {
 }
 
 export function Header({ name, storedTheme }: HeaderProps) {
+  const isDev = process.env.NODE_ENV === 'development';
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -91,6 +92,11 @@ export function Header({ name, storedTheme }: HeaderProps) {
     } else {
       dispatch(setTheme('light'));
     }
+    // 시스템 테마가 다크라면 무조건 다크로
+    // const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    // if (mediaQuery.matches) {
+    //   dispatch(setTheme('dark'));
+    // }
   }, []);
 
   const handleThemeChange = () => {
@@ -98,6 +104,11 @@ export function Header({ name, storedTheme }: HeaderProps) {
     const changeTheme = theme === 'dark' ? 'light' : 'dark'
     // 전역변수에 담기
     dispatch(setTheme(changeTheme));
+    // 시스템 테마가 다크라면 무조건 다크로
+    // const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    // if (mediaQuery.matches) {
+    //   dispatch(setTheme('dark'));
+    // }
     // 쿠키에 테마 저장 -> SSR에서 불러올 수 있도록
     document.cookie = `theme=${changeTheme}; path=/; max-age=31536000`;
     // CSS 속성에 추가 또는 제거
@@ -127,24 +138,29 @@ export function Header({ name, storedTheme }: HeaderProps) {
             }
           </ThemeIconBox>
         </LinkBox>
-        <LinkBox>
-          <HeaderLink href={'/write'}>
-            {theme === 'dark' ?
-              <Icon name='edit' size="20px" color="#ffffff" />
-              :
-              <Icon name='edit' size="20px" color="#000000" />
-            }
-          </HeaderLink>
-        </LinkBox>
-        <LinkBox>
-          <HeaderLink href={'/my'}>
-            {theme === 'dark' ?
-              <Icon name='account_circle' size="20px" color="#ffffff" />
-              :
-              <Icon name='account_circle' size="20px" color="#000000" />
-            }
-          </HeaderLink>
-        </LinkBox>
+        {isDev ?
+          <>
+            <LinkBox>
+              <HeaderLink href={'/write'}>
+                {theme === 'dark' ?
+                  <Icon name='edit' size="20px" color="#ffffff" />
+                  :
+                  <Icon name='edit' size="20px" color="#000000" />
+                }
+              </HeaderLink>
+            </LinkBox>
+            <LinkBox>
+              <HeaderLink href={'/my'}>
+                {theme === 'dark' ?
+                  <Icon name='account_circle' size="20px" color="#ffffff" />
+                  :
+                  <Icon name='account_circle' size="20px" color="#000000" />
+                }
+              </HeaderLink>
+            </LinkBox></>
+          :
+          <></>
+        }
       </RightBox>
     </Widget>
   )
