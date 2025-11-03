@@ -70,7 +70,7 @@ export function MySite({ site }: Props) {
       </WidgetTitle>
       {/* 사이트 설정 */}
       <BoardCategory
-        name="사이트명"
+        name="블로그명"
         category={siteName}
         isChange={isSiteNameChange}
         setCategory={(value) => dispatch(setSiteName(value))}
