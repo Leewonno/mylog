@@ -11,7 +11,7 @@ import { Layout, ScrollToTop } from "@/shares";
 
 // 파일 읽기
 const getBasicData = async () => {
-  const filePath = path.join(process.cwd(), "blog", "info.json");
+  const filePath = path.join(process.cwd(), "data.json");
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const content = JSON.parse(fileContent);
   return content

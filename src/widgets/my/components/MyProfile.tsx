@@ -69,7 +69,7 @@ export function MyProfile({ auth }: Props) {
   const handleNameUpdate = async () => {
     try {
       const data = { id: name }
-      const res = await postData<AuthRequest, AuthResponse>('/api/post/auth/id', data);
+      const res = await postData<AuthRequest, AuthResponse>('/api/post/my/id', data);
       const { message } = await res.json();
       alert(message);
       dispatch(setIsNameChange(false));
@@ -81,7 +81,7 @@ export function MyProfile({ auth }: Props) {
   const handleEmailUpdate = async () => {
     try {
       const data = { email: email }
-      const res = await postData<AuthRequest, AuthResponse>('/api/post/auth/email', data);
+      const res = await postData<AuthRequest, AuthResponse>('/api/post/my/email', data);
       const { message } = await res.json();
       alert(message);
       dispatch(setIsEmailChange(false));
@@ -93,7 +93,7 @@ export function MyProfile({ auth }: Props) {
   const handleGithubUpdate = async () => {
     try {
       const data = { github: github }
-      const res = await postData<AuthRequest, AuthResponse>('/api/post/auth/github', data);
+      const res = await postData<AuthRequest, AuthResponse>('/api/post/my/github', data);
       const { message } = await res.json();
       alert(message);
       dispatch(setIsGithubChange(false));
@@ -105,7 +105,7 @@ export function MyProfile({ auth }: Props) {
   const handlePortfolioUpdate = async () => {
     try {
       const data = { portfolio: portfolio }
-      const res = await postData<AuthRequest, AuthResponse>('/api/post/auth/portfolio', data);
+      const res = await postData<AuthRequest, AuthResponse>('/api/post/my/portfolio', data);
       const { message } = await res.json();
       alert(message);
       dispatch(setIsPortfolioChange(false));

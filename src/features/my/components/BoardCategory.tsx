@@ -24,13 +24,13 @@ const ManageBox = styled.div`
   gap: 20px;
 `
 
-const Content = styled.div`
-  width: 100%;
-  font-size: 16px;
-  color: var(--black);
-  padding: 10px;
-  padding-top: 0;
-`
+// const Content = styled.div`
+//   width: 100%;
+//   font-size: 16px;
+//   color: var(--black);
+//   padding: 10px;
+//   padding-top: 0;
+// `
 
 const Input = styled.input`
   width: 100%;
@@ -81,7 +81,7 @@ export function BoardCategory({ name, category, isChange, setIsChange, setCatego
     <Component>
       <CategoryName>{name}</CategoryName>
       <ManageBox>
-        <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} />
+        <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} onClick={() => setIsChange(true)} />
         {/* {isChange
           ?
           <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} />
