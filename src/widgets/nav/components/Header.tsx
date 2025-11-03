@@ -13,10 +13,20 @@ const Widget = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 60px;
   padding: 0 20px;
   border-bottom: 1px solid #e5e5e5;
   background-color: var(--white);
+  position: fixed;
+  z-index: 9999;
+  /* 글래스모피즘 */
+  /* background: rgba( 255, 255, 255, 0.15 );
+  backdrop-filter: blur( 4.5px );
+  border: 1px solid rgba( 0, 255, 255, 0.18 ); */
+`
+
+const LeftBox = styled.div`
+  
 `
 
 const LogoBox = styled.div`
@@ -29,7 +39,12 @@ const Logo = styled(Link)`
   color: var(--black);
 `
 
-const ThemeBox = styled.div`
+const RightBox = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const LinkBox = styled.div`
   
 `
 
@@ -43,6 +58,18 @@ const ThemeIconBox = styled.label`
   border-radius: 5px;
   display: flex;
   user-select: none;
+  transition: background-color 0s;
+  
+  &:hover {
+    background-color: var(--gray);
+  }
+`
+
+const HeaderLink = styled(Link)`
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  transition: background-color 0s;
 
   &:hover {
     background-color: var(--gray);
@@ -51,40 +78,90 @@ const ThemeIconBox = styled.label`
 
 type HeaderProps = {
   name: string;
+  storedTheme: string | undefined;
 }
 
-export default function Header({ name }: HeaderProps) {
+export function Header({ name, storedTheme }: HeaderProps) {
+  const isDev = process.env.NODE_ENV === 'development';
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    if (storedTheme) {
+      dispatch(setTheme(storedTheme));
+    } else {
+      dispatch(setTheme('light'));
+    }
+    // 시스템 테마가 다크라면 무조건 다크로
+    // const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    // if (mediaQuery.matches) {
+    //   dispatch(setTheme('dark'));
+    // }
+  }, []);
+
+  const handleThemeChange = () => {
+    // 변경될 테마
+    const changeTheme = theme === 'dark' ? 'light' : 'dark'
+    // 전역변수에 담기
+    dispatch(setTheme(changeTheme));
+    // 시스템 테마가 다크라면 무조건 다크로
+    // const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    // if (mediaQuery.matches) {
+    //   dispatch(setTheme('dark'));
+    // }
+    // 쿠키에 테마 저장 -> SSR에서 불러올 수 있도록
+    document.cookie = `theme=${changeTheme}; path=/; max-age=31536000`;
+    // CSS 속성에 추가 또는 제거
     const html = document.documentElement;
-    if (theme === 'dark') {
+    if (changeTheme === 'dark') {
       html.classList.add('dark');
     } else {
       html.classList.remove('dark');
     }
-  }, [theme]);
-
-  const handleThemeChange = () => {
-    dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
   }
 
   return (
     <Widget>
-      <LogoBox>
-        <Logo href={'/'}>{name}</Logo>
-      </LogoBox>
-      <ThemeBox>
-        <ThemeCheckBox onChange={() => handleThemeChange()} id="theme" type="checkbox" />
-        <ThemeIconBox htmlFor="theme">
-          {theme === 'dark' ?
-            <Icon name='Bedtime' size="20px" color="#ffffff" />
-            :
-            <Icon name='Sunny' size="20px" color="#000000" />
-          }
-        </ThemeIconBox>
-      </ThemeBox>
+      <LeftBox>
+        <LogoBox>
+          <Logo href={'/'}>{name}</Logo>
+        </LogoBox>
+      </LeftBox>
+      <RightBox>
+        <LinkBox>
+          <ThemeCheckBox onChange={() => handleThemeChange()} id="theme" type="checkbox" />
+          <ThemeIconBox htmlFor="theme">
+            {theme === 'dark' ?
+              <Icon name='Bedtime' size="20px" color="#ffffff" />
+              :
+              <Icon name='Sunny' size="20px" color="#000000" />
+            }
+          </ThemeIconBox>
+        </LinkBox>
+        {isDev ?
+          <>
+            <LinkBox>
+              <HeaderLink href={'/write'}>
+                {theme === 'dark' ?
+                  <Icon name='edit' size="20px" color="#ffffff" />
+                  :
+                  <Icon name='edit' size="20px" color="#000000" />
+                }
+              </HeaderLink>
+            </LinkBox>
+            <LinkBox>
+              <HeaderLink href={'/my'}>
+                {theme === 'dark' ?
+                  <Icon name='account_circle' size="20px" color="#ffffff" />
+                  :
+                  <Icon name='account_circle' size="20px" color="#000000" />
+                }
+              </HeaderLink>
+            </LinkBox></>
+          :
+          <></>
+        }
+      </RightBox>
     </Widget>
   )
 }

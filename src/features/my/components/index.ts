@@ -1,0 +1,1 @@
+export { BoardCategory } from './BoardCategory'

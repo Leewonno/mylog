@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 
 export async function GET(
-  _: NextRequest,
+  request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
-  const { id } = await context.params; // 👈 Promise로부터 구조분해
+  const { id } = await context.params;
 
   try {
-    const filePath = path.join(process.cwd(), "posts", `${id}.md`);
+    const filePath = path.join(process.cwd(), "post", `${id}.json`);
 
     if (!fs.existsSync(filePath)) {
       return NextResponse.json(
@@ -20,9 +19,9 @@ export async function GET(
     }
 
     const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data: meta, content } = matter(fileContent);
+    const content = JSON.parse(fileContent);  // JSON 파싱
 
-    return NextResponse.json({ meta, content });
+    return NextResponse.json({ content });
   } catch (error) {
     console.error("파일 읽기 오류:", error);
     const message =

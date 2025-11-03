@@ -1,21 +1,72 @@
-import fs from "fs";
+import { BoardComment, BoardNotFound, BoardContent, BoardManagement } from "@/widgets";
 import path from "path";
-import matter from "gray-matter";
-import MarkdownViewer from "@/widgets/write/components/MarkdownViewer";
+import fs from 'fs';
+import { Metadata } from "next";
 
-export default async function BlogPost(props: PageProps<'/[id]'>) {
-  const { id } = await props.params;
-  const filePath = path.join(process.cwd(), "posts", `${id}.md`);
+type BoardData = {
+  title: string;
+  date: string;
+  content: string;
+};
+
+// 데이터 로드 함수
+async function getBoardData(id: number): Promise<BoardData | null> {
+  const filePath = path.join(process.cwd(), "post", `${id}.json`);
   if (!fs.existsSync(filePath)) {
-    return <div>파일을 불러올 수 없습니다.</div>;
+    return null;
   }
   const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { data: meta, content } = matter(fileContent);
+  const content = JSON.parse(fileContent);
+  return content;
+}
+
+// 파일 읽기
+const getUserData = async () => {
+  const filePath = path.join(process.cwd(), "blog", "auth.json");
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const content = JSON.parse(fileContent);
+  return content
+}
+
+// title, description 변경
+export async function generateMetadata(props: PageProps<'/[id]'>): Promise<Metadata> {
+  const { id } = await props.params;
+  const data = await getBoardData(Number(id));
+  if (!data) {
+    return { title: "게시글을 찾을 수 없습니다." };
+  }
+  return {
+    title: data.title,
+    description: data.content,
+  };
+}
+
+// 블로그 포스트
+export default async function BlogPost(props: PageProps<'/[id]'>) {
+  const { id } = await props.params;
+  const boardData = await getBoardData(Number(id));
+  const userData = await getUserData();
+
+  if (!boardData) {
+    return <BoardNotFound />;
+  }
+  // 테스트용 인위적 지연
+  // await new Promise((resolve) => setTimeout(resolve, 500));
   return (
     <>
-      <h1>{meta.title} {meta.date}</h1>
-      <MarkdownViewer content={content} />
+      {/* 제목 */}
+      <BoardManagement
+        id={Number(id)}
+        title={boardData.title}
+        date={boardData.date}
+        name={userData.id} />
+      {/* 본문 */}
+      <BoardContent
+        content={boardData.content} />
+      {/* 이메일 */}
+      <BoardComment
+        name={userData.id}
+        email={userData.email} />
     </>
-
-  )
+  );
 }
