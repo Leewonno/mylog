@@ -1,9 +1,9 @@
 'use client'
 
-import { BoardDate, BoardName, BoardTitle } from "@/features";
+import { BoardHeadData, BoardHeadTitle } from "@/features";
+import { LinkButton } from "@/shares";
 import { timeAgo } from "@/shares/lib/date";
 import { media } from "@/shares/lib/media";
-import Link from "next/link";
 import styled from "styled-components";
 
 const Widget = styled.div`
@@ -15,7 +15,7 @@ const Widget = styled.div`
   border-bottom: 1px solid var(--white-lightgray);
 
   ${media.phone`
-    gap: 1rem;
+    gap: 0.5rem;
     margin-bottom: 2rem;
   `}
 `
@@ -33,32 +33,10 @@ const BoardMetaBox = styled.div`
   gap: 8px;
 `
 
-const BoardDot = styled.div`
+const Dot = styled.div`
   border: 1px solid var(--white-lightgray-text);
   height: 1px;
   border-radius: 50%;
-`
-
-const BoardButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`
-
-const BoardButton = styled(Link)`
-  border: none;
-  border-radius: 20px;
-  padding: 6px 18px;
-  cursor: pointer;
-  border: 1px solid #efefef;
-  box-sizing: border-box;
-  transition: background-color 0.3s;
-  background-color: #f3f3f3;
-  font-size: 14px;
-  color: #000;
-
-  &:hover {
-    background-color: #dfdfdf;
-  }
 `
 
 type Props = {
@@ -68,24 +46,22 @@ type Props = {
   date: string;
 }
 
-export function BoardManagement({ id, name, title, date }: Props) {
+export function BoardHead({ id, name, title, date }: Props) {
 
   const isDev = process.env.NODE_ENV === 'development';
 
   return (
     <Widget>
-      <BoardTitle>{title}</BoardTitle>
+      <BoardHeadTitle>{title}</BoardHeadTitle>
       <BoardInfoBox>
         <BoardMetaBox>
-          <BoardName>{name}</BoardName>
-          <BoardDot />
-          <BoardDate>{timeAgo(date)}</BoardDate>
+          <BoardHeadData>{name}</BoardHeadData>
+          <Dot />
+          <BoardHeadData>{timeAgo(date)}</BoardHeadData>
         </BoardMetaBox>
         {
           isDev ?
-            <BoardButtonBox>
-              <BoardButton href={`/write/${id}`}>수정</BoardButton>
-            </BoardButtonBox>
+            <LinkButton href={`/write/${id}`} icon="edit">수정</LinkButton>
             :
             <></>
         }

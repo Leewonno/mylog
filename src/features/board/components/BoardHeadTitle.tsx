@@ -11,11 +11,10 @@ const Component = styled.div`
 
 const Title = styled.div`
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
 
   ${media.phone`
     font-size: 1.5rem;
-    margin-bottom: 1rem;
   `}
 `
 
@@ -23,7 +22,7 @@ type Props = {
   children: React.ReactNode;
 }
 
-export function BoardTitle({ children }: Props) {
+export function BoardHeadTitle({ children }: Props) {
   return (
     <Component>
       <Title>{children}</Title>

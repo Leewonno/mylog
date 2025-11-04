@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from "@/shares";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
@@ -24,39 +25,21 @@ const ManageBox = styled.div`
   gap: 20px;
 `
 
-// const Content = styled.div`
-//   width: 100%;
-//   font-size: 16px;
-//   color: var(--black);
-//   padding: 10px;
-//   padding-top: 0;
-// `
-
 const Input = styled.input`
   width: 100%;
   font-size: 16px;
-  padding: 10px;
+  padding: 8px;
   border: none;
   border: 1px solid var(--gray);
   outline: none;
   transition: all 0.3s;
   background-color: var(--white);
   color: var(--black);
+  border-radius: 5px;
   
   &:focus {
     border: 1px solid var(--black);
   }
-`
-
-const Button = styled.button`
-  font-size: 14px;
-  font-weight: 600;
-  padding: 5px 15px;
-  white-space: nowrap;
-  border-radius: 15px;
-  border: 1px solid var(--gray);
-  cursor: pointer;
-  transition: background-color 0.3s;
 `
 
 type Props = {
@@ -82,17 +65,11 @@ export function BoardCategory({ name, category, isChange, setIsChange, setCatego
       <CategoryName>{name}</CategoryName>
       <ManageBox>
         <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} onClick={() => setIsChange(true)} />
-        {/* {isChange
-          ?
-          <Input ref={ref} type="text" onChange={(e) => setCategory(e.target.value)} value={category} />
-          :
-          <Content onClick={() => setIsChange(true)}>{category}</Content>
-        } */}
         {isChange
           ?
-          <Button style={{ backgroundColor: 'var(--blue)', color: '#ffffff' }} onClick={handleUpdate}>저장</Button>
+          <Button onClick={handleUpdate} icon="edit_document">저장</Button>
           :
-          <Button onClick={() => setIsChange(true)}>수정</Button>
+          <Button onClick={() => setIsChange(true)} icon="edit">수정</Button>
         }
       </ManageBox>
     </Component>

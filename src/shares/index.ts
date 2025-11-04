@@ -1,4 +1,6 @@
 // components
+export { Button } from './components'
+export { LinkButton } from './components'
 export { SvgIcon } from './components'
 export { MarkdownViewer } from './components'
 export { ScrollToTop } from './components'

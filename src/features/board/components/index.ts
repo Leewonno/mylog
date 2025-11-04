@@ -1,3 +1,2 @@
-export { BoardName } from './BoardName'
-export { BoardDate } from './BoardDate'
-export { BoardTitle } from './BoardTitle'
+export { BoardHeadData } from './BoardHeadData'
+export { BoardHeadTitle } from './BoardHeadTitle'

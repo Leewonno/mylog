@@ -1,3 +1,2 @@
-export { BoardName } from './components'
-export { BoardDate } from './components'
-export { BoardTitle } from './components'
+export { BoardHeadData } from './components'
+export { BoardHeadTitle } from './components'

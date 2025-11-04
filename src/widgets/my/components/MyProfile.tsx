@@ -11,7 +11,7 @@ import styled from "styled-components"
 
 const Widget = styled.div`
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 `
 
 const WidgetTitle = styled.div`

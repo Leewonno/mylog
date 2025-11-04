@@ -1,7 +1,6 @@
 // board
-export { BoardName } from './board'
-export { BoardDate } from './board'
-export { BoardTitle } from './board'
+export { BoardHeadData } from './board'
+export { BoardHeadTitle } from './board'
 
 // my
 export { BoardCategory } from './my'

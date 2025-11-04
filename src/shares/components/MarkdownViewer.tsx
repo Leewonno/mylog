@@ -12,7 +12,7 @@ const ViewerBox = styled.div`
   width: 100%;
   background-color: var(--white);
   color: var(--black);
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 `;
 
 interface Props {

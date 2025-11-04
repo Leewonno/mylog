@@ -1,4 +1,4 @@
-import { BoardComment, BoardNotFound, BoardContent, BoardManagement } from "@/widgets";
+import { BoardComment, BoardNotFound, BoardContent, BoardHead } from "@/widgets";
 import path from "path";
 import fs from 'fs';
 import { Metadata } from "next";
@@ -55,7 +55,7 @@ export default async function BlogPost(props: PageProps<'/[id]'>) {
   return (
     <>
       {/* 제목 */}
-      <BoardManagement
+      <BoardHead
         id={Number(id)}
         title={boardData.title}
         date={boardData.date}

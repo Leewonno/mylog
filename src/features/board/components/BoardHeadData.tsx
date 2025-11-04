@@ -7,7 +7,7 @@ const Component = styled.div`
   color: var(--white-lightgray-text);
 `
 
-const Name = styled.div`
+const Text = styled.div`
   font-size: 16px;
 `
 
@@ -15,10 +15,10 @@ type Props = {
   children: React.ReactNode;
 }
 
-export function BoardName({ children }: Props) {
+export function BoardHeadData({ children }: Props) {
   return (
     <Component>
-      <Name>{children}</Name>
+      <Text>{children}</Text>
     </Component>
   )
 }

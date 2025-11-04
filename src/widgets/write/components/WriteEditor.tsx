@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/shares';
 import postData from '@/shares/lib/post';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
@@ -34,33 +35,6 @@ const ButtonBox = styled.div`
   gap: 5px;
   justify-content: flex-end;
   margin-bottom: 10px;
-`
-
-const Button = styled.button`
-  border: none;
-  border-radius: 20px;
-  padding: 6px 18px;
-  cursor: pointer;
-  border: 1px solid #efefef;
-  box-sizing: border-box;
-  transition: background-color 0.3s;
-  background-color: #f3f3f3;
-  font-size: 14px;
-
-  &:hover {
-    background-color: #dfdfdf;
-  }
-`
-
-
-const SaveButton = styled(Button)`
-  background-color: var(--gray);
-  color: var(--black);
-`
-
-const DeleteButton = styled(Button)`
-  background-color: var(--gray);
-  color: var(--black);
 `
 
 type Props = {
@@ -146,12 +120,12 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
           isUpdate ?
             // 수정
             <>
-              <SaveButton onClick={() => handleUpdatePost()}>저장</SaveButton>
-              <DeleteButton onClick={() => handleDeletePost()}>삭제</DeleteButton>
+              <Button onClick={() => handleUpdatePost()} icon="edit_document">저장</Button>
+              <Button onClick={() => handleDeletePost()} icon="delete">삭제</Button>
             </> :
             // 생성
             <>
-              <SaveButton onClick={() => handleSavePost()}>저장</SaveButton>
+              <Button onClick={() => handleSavePost()} icon="edit_document">저장</Button>
             </>
         }
       </ButtonBox>
