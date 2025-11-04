@@ -75,6 +75,8 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   // 수정인 경우
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
+  const [isReady, setIsReady] = useState(false);
+
   useEffect(() => {
     if (id && postDate) {
       setTitle(postTitle);
@@ -82,6 +84,8 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
       setIsUpdate(true);
       setDate(postDate)
     }
+
+    setIsReady(true);
   }, [])
 
   const handleSavePost = async () => {
@@ -135,11 +139,17 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
-      <MDEditor
-        value={content}
-        onChange={(e) => setContent(e)}
-        height={500}
-      />
+      {isReady ? (
+        <MDEditor
+          value={content}
+          onChange={(e) => setContent(e)}
+          height={500}
+        />
+      ) : (
+        <div style={{ height: 500, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span>에디터 불러오는 중...</span>
+        </div>
+      )}
     </Box>
   );
 }

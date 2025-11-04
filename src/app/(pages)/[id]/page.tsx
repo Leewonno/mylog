@@ -37,7 +37,7 @@ export async function generateMetadata(props: PageProps<'/[id]'>): Promise<Metad
   }
   return {
     title: data.title,
-    description: data.content,
+    description: '',
   };
 }
 
