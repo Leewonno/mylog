@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Log, DB 없는 나만의 블로그
 
-## Getting Started
+## 1. 프로젝트 개요
 
-First, run the development server:
+My Log는 Next.js 14를 기반으로 구축된 개인 블로그 및 포트폴리오 웹사이트입니다. 사용자 친화적인 인터페이스와 효율적인 콘텐츠 관리를 목표로 하며, 개발자가 자신의 글을 작성하고 공유하며, 개인 프로젝트를 소개할 수 있는 플랫폼을 제공합니다. 블로그 게시물 작성, 편집, 삭제 기능을 포함하며, 사용자 인증 및 테마 변경과 같은 고급 기능도 지원합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 2. 주요 기능
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **블로그/게시판**: 글 작성, 수정, 삭제 기능을 제공하며, 게시글 목록 및 상세 페이지를 통해 콘텐츠를 효과적으로 관리할 수 있습니다.
+*   **마크다운 에디터 및 뷰어**: 사용자는 마크다운 문법을 사용하여 글을 작성하고, 뷰어를 통해 미리보기 및 최종 렌더링된 콘텐츠를 확인할 수 있습니다.
+*   **반응형 웹 디자인**: 다양한 기기(데스크톱, 태블릿, 모바일)에서 최적화된 사용자 경험을 제공합니다.
+*   **테마 변경**: 다크 모드/라이트 모드와 같은 테마 변경 기능을 통해 사용자 선호도에 맞춰 인터페이스를 조절할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3. 사용 기술
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   **Frontend**:
+    *   **Next.js 15**: React 프레임워크로, 서버 사이드 렌더링(SSR), 정적 사이트 생성(SSG), API 라우트 등 강력한 기능을 제공하여 성능과 개발 생산성을 높입니다.
+    *   **React**: UI 컴포넌트 기반의 사용자 인터페이스를 구축합니다.
+    *   **TypeScript**: 정적 타입 검사를 통해 코드의 안정성과 유지보수성을 향상시킵니다.
+    *   **Redux Toolkit**: 전역 상태 관리를 효율적으로 처리하며, `homeSlice`, `siteSlice`, `themeSlice`, `userSlice` 등을 통해 각각의 도메인별 상태를 관리합니다.
+    *   **CSS Modules / Global CSS**: 컴포넌트 스코프 CSS 및 전역 스타일을 적용하여 유연한 스타일링을 가능하게 합니다.
+*   **Backend (API Routes)**:
+    *   **Next.js API Routes**: 프런트엔드와 동일한 프로젝트 내에서 백엔드 로직을 처리하여 개발 편의성을 높입니다.
+    *   **Node.js**: API 라우트의 런타임 환경으로 사용됩니다.
 
-## Learn More
+## 모듈화된 아키텍처
+`features`, `shares`, `widgets` 등으로 디렉터리를 구조화하여 각 컴포넌트와 기능의 역할을 명확히 하고, 재사용성을 높였습니다. 이는 대규모 프로젝트에서도 효율적인 코드 관리를 가능하게 합니다.
 
-To learn more about Next.js, take a look at the following resources:
+## 재사용 가능한 UI 컴포넌트
+`shares/components` 디렉터리에 `Button`, `Icon`, `MarkdownViewer` 등 재사용 가능한 UI 컴포넌트를 설계하여 일관된 디자인 시스템을 유지하고 개발 시간을 단축했습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Redux Toolkit을 이용한 효과적인 상태 관리
+Redux Toolkit을 사용하여 복잡한 애플리케이션 상태를 중앙 집중식으로 관리하며, 예측 가능한 상태 변화를 통해 디버깅 및 유지보수를 용이하게 했습니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 사용자 경험(UX) 중심 디자인
+반응형 디자인과 테마 변경 기능을 통해 다양한 사용자 환경과 선호도를 고려한 웹사이트를 구현했습니다.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 프로젝트 구조
+*   **`src/app`**: Next.js App Router의 핵심 부분으로, 페이지, 레이아웃, API 라우트가 정의됩니다.
+*   **`src/assets`**: 애플리케이션에서 사용되는 폰트, 아이콘, 이미지 등의 정적 리소스를 관리합니다.
+*   **`src/features`**: `board`, `home`, `my`와 같이 특정 도메인(기능)에 특화된 로직과 컴포넌트를 포함합니다. 기능별 응집도를 높여 유지보수를 용이하게 합니다.
+*   **`src/shares`**: 프로젝트 전반에 걸쳐 재사용되는 공통 컴포넌트(`components`), 유틸리티 함수(`lib`), 타입 정의(`types`), 공통 스타일(`styles`) 등을 모아두었습니다. 이는 코드 중복을 줄이고 일관성을 유지하는 데 기여합니다.
+*   **`src/widgets`**: `board`, `home`, `nav`, `write`와 같이 여러 작은 컴포넌트들을 조합하여 특정 섹션이나 화면을 구성하는 상위 레벨의 컴포넌트들을 관리합니다.
