@@ -51,10 +51,7 @@ export function HomeSearch() {
   const [search, setSearch] = useState<string>("");
 
   const handleOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const keyCode = e.keyCode;
-    if (keyCode === 13) {
       handleSearch();
-    }
   }
 
   const handleSearch = () => {
@@ -63,7 +60,7 @@ export function HomeSearch() {
       return;
     }
     const searchData = boardListData.filter((v) => {
-      return v.data.title.indexOf(search) > -1 || v.data.content.indexOf(search) > -1
+      return v.data.title.toLowerCase().indexOf(search.toLowerCase()) > -1 || v.data.content.toLowerCase().indexOf(search.toLowerCase()) > -1
     })
     dispatch(setSearchListData(searchData));
   }

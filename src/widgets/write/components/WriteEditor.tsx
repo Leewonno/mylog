@@ -1,14 +1,19 @@
 'use client'
 
-import { Button } from '@/shares';
+import { Button, Loading } from '@/shares';
 import postData from '@/shares/lib/post';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 // Markdown 에디터
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
+  ssr: false,
+  loading: () => (
+    <Loading />
+  )
+});
 
 const Box = styled.div`
   width: 100%;
@@ -75,7 +80,8 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   // 수정인 경우
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
-  const [isReady, setIsReady] = useState(false);
+  // 제목 or 본문 수정 여부
+  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   useEffect(() => {
     if (id && postDate) {
@@ -84,9 +90,60 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
       setIsUpdate(true);
       setDate(postDate)
     }
+  }, []);
 
-    setIsReady(true);
-  }, [])
+  const beforeUnloadHandler = useCallback(
+    (event: BeforeUnloadEvent) => {
+      // 페이지를 벗어나지 않아야 하는 경우
+      if (isEdited) {
+        event.preventDefault();
+        event.returnValue = true;
+      }
+    }, [isEdited]);
+
+  useEffect(() => {
+    const originalPush = router.push;
+    const newPush = (href: string): void => {
+      // 페이지를 벗어나지 않아야 하는 경우
+      if (isEdited) {
+        return;
+      }
+      originalPush(href);
+      return;
+    };
+    router.push = newPush;
+    window.onbeforeunload = beforeUnloadHandler;
+    return () => {
+      router.push = originalPush;
+      window.onbeforeunload = null;
+    };
+  }, [isEdited, router, beforeUnloadHandler]);
+
+
+  const handlePopState = useCallback(() => {
+    console.log("실행")
+    // 페이지를 벗어나지 않아야 하는 경우
+    if (isEdited) {
+      history.pushState(null, '', '');
+      return;
+    }
+    history.back();
+  }, [isEdited]);
+
+  // const isClickedFirst = useRef(false);
+  // useEffect(() => {
+  //   if (!isClickedFirst.current) {
+  //     history.pushState(null, '', window.location.href);
+  //     isClickedFirst.current = true;
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [handlePopState]);
 
   const handleSavePost = async () => {
     const res = await postData<SaveRequest, CommonResponse>('/api/post/blog/create', { content: content, title: title, date: new Date().toISOString() })
@@ -136,20 +193,21 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
       <TitleInput
         placeholder='제목'
         type="text"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setIsEdited(true);
+        }}
         value={title}
       />
-      {isReady ? (
-        <MDEditor
-          value={content}
-          onChange={(e) => setContent(e)}
-          height={500}
-        />
-      ) : (
-        <div style={{ height: 500, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span>에디터 불러오는 중...</span>
-        </div>
-      )}
+      <MDEditor
+        value={content}
+        onChange={(e) => {
+          setContent(e);
+          setIsEdited(true)
+        }}
+        height={500}
+      />
+
     </Box>
   );
 }

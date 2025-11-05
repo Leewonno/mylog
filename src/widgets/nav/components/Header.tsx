@@ -34,7 +34,7 @@ const LogoBox = styled.div`
 `
 
 const Logo = styled(Link)`
-  font-weight: 700;
+  font-weight: 600;
   font-size: 22px;
   color: var(--black);
 `

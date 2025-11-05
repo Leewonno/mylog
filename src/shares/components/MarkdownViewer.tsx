@@ -2,10 +2,15 @@
 
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import { Loading } from './Loading';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview'),
-  { ssr: false }
+  { ssr: false,
+    loading: () => (
+      <Loading />
+    )
+   }
 );
 
 const ViewerBox = styled.div`
