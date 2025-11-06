@@ -62,13 +62,13 @@ export function Footer({ name }: FooterProps) {
         <Name>2025 · MyLog · {name}</Name>
       </NameBox>
       <ProviderBox>
-        <Provider href={"https://github.com/Leewonno"} target="_blank">
+        <Provider href={"https://github.com/Leewonno/mylog"} target="_blank">
           {theme === 'dark' ?
             <ProviderIcon alt="github" src={githubLight} width={22} height={22} />
             :
             <ProviderIcon alt="github" src={github} width={22} height={22} />
           }
-          <ProviderText>Developer</ProviderText>
+          <ProviderText>Repository</ProviderText>
         </Provider>
       </ProviderBox>
     </Widget>
