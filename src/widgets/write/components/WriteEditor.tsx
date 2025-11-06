@@ -4,7 +4,7 @@ import { Button, Loading } from '@/shares';
 import postData from '@/shares/lib/post';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Markdown 에디터
@@ -119,16 +119,16 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
     };
   }, [isEdited, router, beforeUnloadHandler]);
 
+  // const handlePopState = useCallback(() => {
+  //   console.log("실행")
+  //   // 페이지를 벗어나지 않아야 하는 경우
+  //   if (isEdited) {
+  //     history.pushState(null, '', '');
+  //     return;
+  //   }
 
-  const handlePopState = useCallback(() => {
-    console.log("실행")
-    // 페이지를 벗어나지 않아야 하는 경우
-    if (isEdited) {
-      history.pushState(null, '', '');
-      return;
-    }
-    history.back();
-  }, [isEdited]);
+  //   history.back();
+  // }, [isEdited]);
 
   // const isClickedFirst = useRef(false);
   // useEffect(() => {
@@ -138,12 +138,12 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   //   }
   // }, []);
 
-  useEffect(() => {
-    window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [handlePopState]);
+  // useEffect(() => {
+  //   window.addEventListener('popstate', handlePopState);
+  //   return () => {
+  //     window.removeEventListener('popstate', handlePopState);
+  //   };
+  // }, [handlePopState]);
 
   const handleSavePost = async () => {
     const res = await postData<SaveRequest, CommonResponse>('/api/post/blog/create', { content: content, title: title, date: new Date().toISOString() })
