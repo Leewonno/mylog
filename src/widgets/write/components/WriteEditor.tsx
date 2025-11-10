@@ -168,9 +168,16 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   const handleUpdatePost = async () => {
     const res = await postData<UpdateRequest, CommonResponse>('/api/post/blog/update', { id: id, content: content, title: title, date: date })
     const data = await res.json();
+    console.log(res)
     alert(data.message);
     if (res.status === 200) {
+      console.log("실행")
       router.push(`/${id}`)
+      console.log("이동 경로:", `/${id}`)
+      await new Promise(r => setTimeout(r, 500))
+      setTimeout(()=>{
+        router.push(`/${id}`)
+      }, 500)
     }
   }
 
