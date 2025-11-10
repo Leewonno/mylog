@@ -4,7 +4,7 @@ import { Button, Loading } from '@/shares';
 import postData from '@/shares/lib/post';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Markdown 에디터
@@ -77,11 +77,21 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   const [content, setContent] = useState<string | undefined>("");
   const [date, setDate] = useState<string>("");
 
+  const [isEdited, setIsEdited] = useState(false)
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isEdited) {
+        event.preventDefault()
+        event.returnValue = ''
+      }
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [isEdited])
+
   // 수정인 경우
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
-
-  // 제목 or 본문 수정 여부
-  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   useEffect(() => {
     if (id && postDate) {
@@ -92,65 +102,12 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
     }
   }, []);
 
-  const beforeUnloadHandler = useCallback(
-    (event: BeforeUnloadEvent) => {
-      // 페이지를 벗어나지 않아야 하는 경우
-      if (isEdited) {
-        event.preventDefault();
-        event.returnValue = true;
-      }
-    }, [isEdited]);
-
-  useEffect(() => {
-    const originalPush = router.push;
-    const newPush = (href: string): void => {
-      // 페이지를 벗어나지 않아야 하는 경우
-      if (isEdited) {
-        return;
-      }
-      originalPush(href);
-      return;
-    };
-    router.push = newPush;
-    window.onbeforeunload = beforeUnloadHandler;
-    return () => {
-      router.push = originalPush;
-      window.onbeforeunload = null;
-    };
-  }, [isEdited, router, beforeUnloadHandler]);
-
-  // const handlePopState = useCallback(() => {
-  //   console.log("실행")
-  //   // 페이지를 벗어나지 않아야 하는 경우
-  //   if (isEdited) {
-  //     history.pushState(null, '', '');
-  //     return;
-  //   }
-
-  //   history.back();
-  // }, [isEdited]);
-
-  // const isClickedFirst = useRef(false);
-  // useEffect(() => {
-  //   if (!isClickedFirst.current) {
-  //     history.pushState(null, '', window.location.href);
-  //     isClickedFirst.current = true;
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   window.addEventListener('popstate', handlePopState);
-  //   return () => {
-  //     window.removeEventListener('popstate', handlePopState);
-  //   };
-  // }, [handlePopState]);
-
   const handleSavePost = async () => {
     const res = await postData<SaveRequest, CommonResponse>('/api/post/blog/create', { content: content, title: title, date: new Date().toISOString() })
     const data = await res.json();
     alert(data.message);
     if (res.status === 200) {
-      router.push('/')
+      router.push('/');
     }
   };
 
@@ -168,16 +125,9 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
   const handleUpdatePost = async () => {
     const res = await postData<UpdateRequest, CommonResponse>('/api/post/blog/update', { id: id, content: content, title: title, date: date })
     const data = await res.json();
-    console.log(res)
     alert(data.message);
     if (res.status === 200) {
-      console.log("실행")
       router.push(`/${id}`)
-      console.log("이동 경로:", `/${id}`)
-      await new Promise(r => setTimeout(r, 500))
-      setTimeout(()=>{
-        router.push(`/${id}`)
-      }, 500)
     }
   }
 
@@ -210,7 +160,7 @@ export function WriteEditor({ id, postTitle, postContent, postDate }: Props) {
         value={content}
         onChange={(e) => {
           setContent(e);
-          setIsEdited(true)
+          setIsEdited(true);
         }}
         height={500}
       />
