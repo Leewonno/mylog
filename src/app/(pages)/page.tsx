@@ -3,14 +3,14 @@ import fs from "fs";
 import { HomePreviewList, HomeSearch, HomeUserInformation } from "@/widgets";
 
 
-const getBlogData = async () => {
+const getBlog = async () => {
   const filePath = path.join(process.cwd(), "data.json");
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const content = JSON.parse(fileContent);
   return content
 }
 
-const getPostData = async () => {
+const getPosts = async () => {
   const dir = path.join(process.cwd(), "post");
   const files = fs.readdirSync(dir);
   const posts: BoardListType[] = files
@@ -25,14 +25,14 @@ const getPostData = async () => {
 }
 
 export default async function Home() {
-  const userData = await getBlogData();
-  const blogData: BoardListType[] = await getPostData();
+  const blog = await getBlog();
+  const posts: BoardListType[] = await getPosts();
 
   return (
     <>
-      <HomeUserInformation data={userData} />
+      <HomeUserInformation data={blog} />
       <HomeSearch />
-      <HomePreviewList data={blogData} />
+      <HomePreviewList data={posts} />
     </>
   );
 }
