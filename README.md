@@ -1,3 +1,5 @@
+<img width="1920" height="540" alt="mylog" src="https://github.com/user-attachments/assets/ff00facb-8dbd-430b-ba02-506a783b48d4" />
+
 # MyLog — DB 없이 운영하는 나만의 블로그
 
 <br />
@@ -203,17 +205,20 @@ git push origin main
 이제 Vercel에 나만의 블로그를 배포할 차례입니다. 
 
 <br />
+<br />
 
 1️⃣ Vercel에 로그인 후 Add New -> Project 버튼을 눌러주세요
 
 <img width="1689" height="444" alt="vercel" src="https://github.com/user-attachments/assets/f378427b-e8ed-482f-9f65-e29787cae153" />
 
 <br />
+<br />
 
 2️⃣ 배포할 Repository를 선택(import) 해주세요
 
 <img width="1240" height="681" alt="vercel2" src="https://github.com/user-attachments/assets/cc0f8ada-fd8b-4803-9fb4-e039183edab3" />
 
+<br />
 <br />
 
 3️⃣ Framework Preset을 Next.js로 선택 후, Deploy 버튼을 눌러주세요
