@@ -6,7 +6,7 @@ MyLog는 Next.js 15 기반으로 개발된 개인 블로그입니다.
 별도의 데이터베이스 서버 없이 JSON 파일로 데이터를 관리하며,
 Markdown 문법을 이용해 간편하게 글을 작성할 수 있습니다.
 
-[미리보기]('https://mylog-leewonno.vercel.app')
+[미리보기](https://mylog-leewonno.vercel.app)
 
 ## 💡 개발 목적
 
@@ -42,3 +42,6 @@ src/
 - `widgets` : 페이지 내에서 UI를 조합하는 단위 컴포넌트
 - `shares` : 공통 모듈
 - `assets` : 폰트, 아이콘, 이미지 등 정적 리소스
+
+## 🏃 사용법
+
