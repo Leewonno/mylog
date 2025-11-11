@@ -1,3 +1,5 @@
+<img width="1920" height="540" alt="mylog" src="https://github.com/user-attachments/assets/ff00facb-8dbd-430b-ba02-506a783b48d4" />
+
 # MyLog — DB 없이 운영하는 나만의 블로그
 
 <br />
