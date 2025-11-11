@@ -45,3 +45,63 @@ src/
 
 ## 🏃 사용법
 
+### 1. 설정
+
+1️⃣ 프로젝트를 clone 또는 fork 해주세요
+
+```
+git clone https://github.com/Leewonno/mylog.git
+```
+
+or
+
+<img width="1264" height="651" alt="fork" src="https://github.com/user-attachments/assets/72a685a6-d5dc-4fc3-82c4-e7b807a54e53" />
+
+```bash
+# fork 후, 프로젝트를 내PC에 clone 해주세요
+git clone https://github.com/UserName(leewonno)/mylog.git
+```
+
+<br />
+
+2️⃣ fork하지 않고 clone한 경우, 새로운 레포지토리를 만들어 clone 한 레포지토리를 넣어주세요
+
+<img width="784" height="779" alt="image" src="https://github.com/user-attachments/assets/3b62e04b-0d16-4aa5-a4bf-f2be6e12c053" />
+
+```
+git remote add origin https://github.com/UserName(leewonno)/RepositoryName(mylog-leewonno).git
+git add .
+git commit -m "commit message"
+git branch -M main
+git push -u origin main
+```
+
+<br />
+
+3️⃣ 프로젝트 폴더로 이동해, 의존성을 설치해주세요
+
+```
+yarn install
+```
+
+or
+
+```
+npm install
+```
+
+<br />
+
+
+4️⃣ next 개발 서버를 실행하고 블로그를 설정해주세요
+
+
+```
+yarn dev
+```
+
+or
+
+```
+npm run dev
+```
