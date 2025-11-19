@@ -35,11 +35,20 @@ Markdown 문법을 이용해 간편하게 글을 작성할 수 있습니다.
 <br />
 
 ## ⚙️ 사용 기술
-- **Next.js** : React 프레임워크로, 서버 사이드 렌더링(SSR), 정적 사이트 생성(SSG)을 제공하기 위해 사용하였습니다.
-- **React** : JavaScript 라이브러리로, 부드러운 UI 동작을 위해 사용하였습니다.
-- **TypeScript** : 정적 타입 명시를 통해 코드의 안정성과 유지보수성을 향상시키기 위해 사용하였습니다.
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white" />
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+<img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white" />
+<img src="https://img.shields.io/badge/StyledComponents-DB7093?style=flat-square&logo=styledcomponents&logoColor=white" />
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+
+
+<br />
+
+- **React** : 부드러운 UI 동작을 위해 사용하였습니다.
+- **Next.js** : 서버 사이드 렌더링(SSR), 정적 사이트 생성(SSG)을 제공하기 위해 사용하였습니다.
 - **Redux Toolkit** : 전역 상태 관리를 위해 사용하였습니다.
 - **Styled-Components** : JavaScript 파일 내에서 CSS를 작성하고, 스타일 충돌 방지를 위해 사용하였습니다.
+- **TypeScript** : 정적 타입 명시를 통해 코드의 안정성과 유지보수성을 향상시키기 위해 사용하였습니다.
 
 <br />
 
